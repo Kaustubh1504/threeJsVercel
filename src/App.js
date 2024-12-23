@@ -8,6 +8,7 @@ function Model(props) {
 
 function App() {
   return (
+    
     <Canvas dpr={[1, 2]} shadows camera={{ fov: 45 }} style={{ position: "absolute" }}>
       <color attach="background" args={["#101010"]} />
       <OrbitControls 
