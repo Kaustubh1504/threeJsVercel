@@ -1,38 +1,16 @@
-// import { Canvas , ARCanvas} from "@react-three/fiber";
-// import { useGLTF, OrbitControls } from "@react-three/drei";
-
-// function Model(props) {
-//   const { scene } = useGLTF("/kala_brown.gltf");
-//   return <primitive object={scene} {...props} />;
-// }
-
-// function App() {
-//   return (
-    
-//     <Canvas dpr={[1, 2]} shadows camera={{ fov: 45 }} style={{ position: "absolute" }}>
-//       <color attach="background" args={["#101010"]} />
-//       <OrbitControls 
-//         enableZoom={true} 
-//         enablePan={true} 
-//         enableRotate={true} 
-//         maxPolarAngle={Math.PI / 2} 
-//         minPolarAngle={0} 
-//       />
-//       <ambientLight intensity={0.5} />
-//       <directionalLight position={[10, 10, 5]} intensity={1} />
-//       <Model scale={0.5} />
-//     </Canvas>
-//   );
-// }
-
-// export default App;
-
-
 import React, { useRef, useEffect } from "react";
-import { Canvas, useFrame, extend, useThree } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { ARButton } from "three/addons/webxr/ARButton.js";
 
+// Component for the 3D Model
+function Model(props) {
+  const { scene } = useGLTF("/kala_brown.gltf"); // Replace with the path to your GLTF file
+  return <primitive object={scene} {...props} />;
+}
+
+// Main App Component
 function App() {
   const { gl } = useThree();
   const controller = useRef();
@@ -75,10 +53,13 @@ function App() {
     <>
       <hemisphereLight intensity={3} color={0xffffff} groundColor={0xbbbbff} position={[0.5, 1, 0.25]} />
       <primitive ref={controller} object={gl.xr.getController(0)} />
+      {/* Add the 3D model into the AR scene */}
+      <Model scale={0.2} position={[0, 0, -1]} />
     </>
   );
 }
 
+// ARScene Component
 function ARScene() {
   return (
     <Canvas>
