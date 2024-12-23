@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useGLTF } from "@react-three/drei";
+import { useGLTF , OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { ARButton } from "three/addons/webxr/ARButton.js";
 
@@ -51,7 +51,8 @@ function App() {
 
   return (
     <>
-      <hemisphereLight intensity={3} color={0xffffff} groundColor={0xbbbbff} position={[0.5, 1, 0.25]} />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 5]} intensity={1} />
       <primitive ref={controller} object={gl.xr.getController(0)} />
       {/* Add the 3D model into the AR scene */}
       <Model scale={0.2} position={[0, 0, -1]} />
@@ -62,7 +63,14 @@ function App() {
 // ARScene Component
 function ARScene() {
   return (
-    <Canvas>
+    <Canvas dpr={[1, 2]} shadows camera={{ fov: 45 }} style={{ position: "absolute"}}>
+      <OrbitControls
+        enableZoom={true}
+        enablePan={true}
+        enableRotate={true}
+        maxPolarAngle={Math.PI / 2}
+        minPolarAngle={0}
+      />
       <App />
     </Canvas>
   );
