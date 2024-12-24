@@ -15,6 +15,8 @@ import * as BABYLON from "babylonjs";
 import "@babylonjs/loaders/glTF/2.0";
 import "@babylonjs/loaders/glTF";
 import "@babylonjs/loaders";
+import { SceneLoader } from '@babylonjs/core/Loading';
+import '@babylonjs/loaders';
 
 const App = () => {
     const reactCanvas = useRef(null);
@@ -172,10 +174,10 @@ const App = () => {
             ground.dispose();
             hole.dispose();
 
-            console.log("Is Gltf available...",BABYLON.SceneLoader.IsPluginForExtensionAvailable('.gltf'));
+            console.log("Is Gltf available...",SceneLoader.IsPluginForExtensionAvailable('.gltf'));
             //Load Virtual world: the "Hill Valley Scene" and configure occluders
             engine.displayLoadingUI(); //Display the loading screen as the scene takes a few seconds to load
-            const virtualWorldResult = await BABYLON.SceneLoader.ImportMeshAsync("https://raw.githubusercontent.com/Kaustubh1504/crimeDoorArScenesTest/refs/heads/main/kala_brown.gltf",scene);
+            const virtualWorldResult = await SceneLoader.ImportMeshAsync("","https://raw.githubusercontent.com/Kaustubh1504/crimeDoorArScenesTest/refs/heads/main/kala_brown.gltf","",scene);
             console.log(virtualWorldResult)
             engine.hideLoadingUI(); //Hide Loadingscreen once the scene is loaded
             for (let child of virtualWorldResult.meshes) {
