@@ -173,7 +173,7 @@ const App = () => {
 
             //Load Virtual world: the "Hill Valley Scene" and configure occluders
             engine.displayLoadingUI(); //Display the loading screen as the scene takes a few seconds to load
-            const virtualWorldResult = await BABYLON.SceneLoader.ImportMeshAsync("", "https://www.babylonjs.com/Scenes/hillvalley/", "HillValley.babylon", scene);
+            const virtualWorldResult = await BABYLON.SceneLoader.ImportMeshAsync("", "https://raw.githubusercontent.com/Kaustubh1504/crimeDoorArScenesTest/refs/heads/main/kala_brown.gltf", "", scene);
             console.log(virtualWorldResult)
             engine.hideLoadingUI(); //Hide Loadingscreen once the scene is loaded
             for (let child of virtualWorldResult.meshes) {
