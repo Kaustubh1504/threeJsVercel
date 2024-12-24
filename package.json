@@ -14,6 +14,7 @@
     "@testing-library/user-event": "^13.5.0",
     "babylonjs": "^7.41.1",
     "babylonjs-gui": "^7.41.1",
+    "mkcert": "^3.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
