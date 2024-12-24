@@ -523,6 +523,9 @@ const App = () => {
 
             // await JustOcclusion(canvas)
 
+
+            // return;
+
             // await createScene();
 
             const light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
@@ -668,7 +671,7 @@ const App = () => {
 
 
             const virtualWorldResult = await SceneLoader.ImportMeshAsync("", "https://raw.githubusercontent.com/Kaustubh1504/crimeDoorArScenesTest/refs/heads/main/kala_brown.gltf", "", scene);
-            // console.log(virtualWorldResult)
+            console.log(virtualWorldResult)
 
             const scaleFactor = 0.03;
             for (let child of virtualWorldResult.meshes) {
@@ -718,24 +721,27 @@ const App = () => {
             rootOccluder.setEnabled(false);
 
             let portalAppearded = false;
-            let portalPosition = new BABYLON.Vector3();
+            let portalPosition = new BABYLON.Vector3(0, 0, -1);
 
             scene.onPointerDown = (evt, pickInfo) => {
+                console.log("In on pointer down.....")
                 if (hitTest && xr.baseExperience.state === BABYLON.WebXRState.IN_XR && !portalAppearded) {
                     portalAppearded = true;
 
                     //Enable the virtual world and move it to the hitTest position
-                    rootScene.setEnabled(true);
-                    rootOccluder.setEnabled(true);
+                    // rootScene.setEnabled(true);
+                    // rootOccluder.setEnabled(true);
 
-                    hitTest.transformationMatrix.decompose(undefined, undefined, portalPosition);
+                    console.log("Portal Hit.....")
+                    // hitTest.transformationMatrix.decompose(undefined, undefined, portalPosition);
+                    console.log("after hit test...")
 
                     rootOccluder.position = portalPosition;
                     rootScene.position = portalPosition;
-                    //Move virtual scene 1 unit lower (this HillValley scene is at 1 above origin - and the grass at 1.2)
+                    // Move virtual scene 1 unit lower (this HillValley scene is at 1 above origin - and the grass at 1.2)
                     rootScene.translate(BABYLON.Axis.Y, -1);
 
-                    //Positionate in front the car
+                    // Positionate in front the car
                     rootScene.translate(BABYLON.Axis.X, 29);
                     rootScene.translate(BABYLON.Axis.Z, -11);
 
@@ -760,9 +766,9 @@ const App = () => {
                     occluderLeft.translate(BABYLON.Axis.X, 3.5);
 
                     //Add mesh for portal
-                    const pilar1 = BABYLON.MeshBuilder.CreateBox("pilar1", { height: 2, width: .1, depth: .1 });
-                    const pilar2 = BABYLON.MeshBuilder.CreateBox("pilar2", { height: 2, width: .1, depth: .1 });
-                    const pilar3 = BABYLON.MeshBuilder.CreateBox("pilar3", { height: 1.1, width: .1, depth: .1 });
+                    const pilar1 = BABYLON.MeshBuilder.CreateBox("pilar1", { height: 2, width: .1, depth: .1 },scene);
+                    const pilar2 = BABYLON.MeshBuilder.CreateBox("pilar2", { height: 2, width: .1, depth: .1 },scene);
+                    const pilar3 = BABYLON.MeshBuilder.CreateBox("pilar3", { height: 1.1, width: .1, depth: .1 },scene);
 
                     //Move pilars to make a portal
                     pilar2.translate(BABYLON.Axis.X, 1, BABYLON.Space.LOCAL);
